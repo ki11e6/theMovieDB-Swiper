@@ -53,7 +53,7 @@ async function displayPopularMovies() {
 
 //display 20 most popular tv shows
 async function displayPopularShows() {
-  const { results } = await fetchApiData('tv/top_rated');
+  const { results } = await fetchApiData('tv/popular');
   console.log(results);
 
   results.forEach((show) => {
@@ -63,7 +63,7 @@ async function displayPopularShows() {
     img ||= 'images/no-image.jpg';
     div.classList.add('card');
     div.innerHTML = `
-    <a href="tv-details.html?id=1">
+    <a href="tv-details.html?id=${show.id}">
       <img src=${img} class="card-img-top" alt=${show.name} />
     </a>
     <div class="card-body">
@@ -148,7 +148,7 @@ function addCommasToNumber(number) {
 // Display Show Details
 async function displayShowDetails() {
   const showId = window.location.search.split('=')[1];
-
+  console.log(showId);
   const show = await fetchApiData(`tv/${showId}`);
 
   // Overlay for background image
